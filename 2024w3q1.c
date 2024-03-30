@@ -3,8 +3,14 @@
 
 int i_sqrt(int N)
 {
-    int msb = (int) log2(N);
+    int msb = 0;
+    int n = N;
+    while (n > 1) {
+        n >>= 1;
+        msb++;
+    }
     int a = 1 << msb;
+    printf("%d\n", msb);
     int result = 0;
     while (a != 0) {
         if ((result + a) * (result + a) <= N)
