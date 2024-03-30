@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdint.h>
+
+typedef unsigned int uint32_t;
 
 int ilog2(int i)
 {
@@ -32,7 +35,12 @@ static size_t ilog2_2(size_t i)
     return result;
 }
 
+int ilog32(uint32_t v)
+{
+    return (31 - __builtin_clz(v));
+}
+
 int main(){
-    printf("%zu\n", ilog2_2(8));
+    printf("%d\n", ilog32(8));
     return 0;
 }
