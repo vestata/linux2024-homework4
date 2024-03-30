@@ -1,23 +1,19 @@
 #include <math.h>
 #include <stdio.h>
 
-int i_sqrt(int N)
+int i_sqrt(int x)
 {
-    int msb = 0;
-    int n = N;
-    while (n > 1) {
-        n >>= 1;
-        msb++;
+    if (x <= 1) /* Assume x is always positive */
+        return x;
+
+    int z = 0;
+    for (int m = 1UL << ((31 - __builtin_clz(x)) & ~1UL); m; m >>= 2) {
+        int b = z + m;
+        z >>= 1;
+        if (x >= b)
+            x -= b, z += m;               
     }
-    int a = 1 << msb;
-    printf("%d\n", msb);
-    int result = 0;
-    while (a != 0) {
-        if ((result + a) * (result + a) <= N)
-            result += a;
-        a >>= 1;
-    }
-    return result;
+    return z;
 }
 
 int main()
