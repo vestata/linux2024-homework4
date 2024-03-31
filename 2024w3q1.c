@@ -18,7 +18,7 @@ int i_sqrt(int x)
         return x;
 
     int z = 0;
-    for (int m = 1UL << ((31 - fls(x)) & ~1UL); m; m >>= 2) {
+    for (int m = 1UL << ((fls(x) - 1) & ~1UL); m; m >>= 2) {
         int b = z + m;
         z >>= 1;
         if (x >= b)
