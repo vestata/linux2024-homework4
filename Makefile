@@ -6,6 +6,11 @@ EXECUTABLES = $(SOURCES:.c=)
 
 all: $(EXECUTABLES)
 
+log: 2024w3q3.c
+	$(CC) -o 2024w3q3 $< -lrt
+	./2024w3q3
+	gnuplot test.gp
+
 %: %.c
 	$(CC) -o $@ $<
 
